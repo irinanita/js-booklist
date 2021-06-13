@@ -36,10 +36,9 @@ UI.prototype.showAlert = function (message, className) {
   // Insert alert before the form
   container.insertBefore(div, form);
   // Timeout after 3s
-  setTimeout(function(){
-    document.querySelector('.alert').remove();
-  },3000)
-
+  setTimeout(function () {
+    document.querySelector(".alert").remove();
+  }, 3000);
 };
 
 UI.prototype.clearFields = function () {
@@ -68,6 +67,9 @@ document.getElementById("book-form").addEventListener("submit", function (e) {
   } else {
     // Add book to list
     ui.addBookToList(book);
+
+    // Show success alert
+    ui.showAlert("Book successfully added to the list", "success");
 
     // Clear input fields
     ui.clearFields();
