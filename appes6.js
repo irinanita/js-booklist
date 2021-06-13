@@ -56,6 +56,29 @@ class UI {
   }
 }
 
+// Local Storage Class
+class Store {
+  static getBooks() {
+    let books;
+    if (localStorage.getItem("books") === null) {
+      books = [];
+    } else {
+      books = JSON.parse(localStorage.getItem("books"));
+    }
+    return books;
+  }
+
+  static displayBooks() {}
+
+  static addBook(book) {
+    const books = Store.getBooks();
+    books.push(book);
+    localStorage.setItem("books", JSON.stringify(books));
+  }
+
+  static removeBook() {}
+}
+
 // Instantiate UI
 const ui = new UI();
 
@@ -77,6 +100,9 @@ document.getElementById("book-form").addEventListener("submit", function (e) {
     // Add book to list
     ui.addBookToList(book);
 
+    // Add to local storage. No neen to instantiate as it is using a static method
+    Store.addBook(book);
+
     // Show success alert
     ui.showAlert("Book successfully added to the list", "success");
 
@@ -96,5 +122,3 @@ document.querySelector("#book-list").addEventListener("click", function (e) {
     ui.showAlert("Book Removed", "success");
   }
 });
-
-console.log(ui)
